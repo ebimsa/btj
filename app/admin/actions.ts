@@ -2,13 +2,12 @@
 
 import { GalleryType } from "@prisma/client";
 import { randomUUID } from "crypto";
-import { mkdir, writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import path from "path";
 import { clearAdminSession, requireAdmin } from "@/lib/auth";
 import { normalizePhoneNumber } from "@/lib/phone-utils";
 import { prisma } from "@/lib/prisma";
+import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
 function requiredString(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -28,19 +27,34 @@ async function saveUploadedImage(file: File, folder: "crews" | "units" | "galler
     throw new Error("File harus berupa gambar");
   }
 
-  const extensionFromName = path.extname(file.name || "").toLowerCase();
-  const extension = extensionFromName || ".jpg";
-  const fileName = `${Date.now()}-${randomUUID()}${extension}`;
-  const relativeDir = path.join("uploads", folder);
-  const absoluteDir = path.join(process.cwd(), "public", relativeDir);
-  const absoluteFilePath = path.join(absoluteDir, fileName);
-
-  await mkdir(absoluteDir, { recursive: true });
-
+  const extensionFromName = (file.name || "").split(".").pop()?.toLowerCase();
+  const extensionFromMime = mimeType.split("/")[1]?.toLowerCase();
+  const extension = extensionFromName || extensionFromMime || "jpg";
+  const fileName = `${Date.now()}-${randomUUID()}.${extension}`;
+  const objectPath = `uploads/${folder}/${fileName}`;
   const arrayBuffer = await file.arrayBuffer();
-  await writeFile(absoluteFilePath, Buffer.from(arrayBuffer));
+  const bucket = process.env.SUPABASE_STORAGE_BUCKET || "btj-media";
+  const supabaseAdmin = getSupabaseAdmin();
 
-  return `/${relativeDir.replace(/\\/g, "/")}/${fileName}`;
+  const { error: uploadError } = await supabaseAdmin.storage
+    .from(bucket)
+    .upload(objectPath, arrayBuffer, {
+      contentType: mimeType,
+      upsert: false,
+    });
+
+  if (uploadError) {
+    throw new Error(`Upload gambar gagal: ${uploadError.message}`);
+  }
+
+  const { data: publicData } = supabaseAdmin.storage.from(bucket).getPublicUrl(objectPath);
+  const publicUrl = publicData.publicUrl;
+
+  if (!publicUrl) {
+    throw new Error("Gagal mendapatkan URL publik gambar");
+  }
+
+  return publicUrl;
 }
 
 async function getUploadedImageUrls(formData: FormData, key: string, folder: "crews" | "units" | "gallery" | "hero") {
