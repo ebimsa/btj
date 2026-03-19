@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  name         String
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SiteConfig {
+  id             Int      @id @default(1)
+  heroTitle      String   @default("Bengal Trans Jaya")
+  heroSubtitle   String   @default("Sewa Bus Pariwisata Lampung")
+  heroDescription String  @default("Melayani Study Wisata, City Tour, Family Gathering, Antar Manten, Ziarah Wali, Drop-Dropan, dan berbagai perjalanan lainnya.")
+  whatsappNumber String   @default("6282281334100")
+  whatsappLabel  String   @default("Booking: Ms Bagus")
+  locationLabel  String   @default("Lampung")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model HeroSlide {
+  id        String   @id @default(cuid())
+  imageUrl  String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Unit {
+  id          String         @id @default(cuid())
+  name        String
+  description String
+  capacity    String
+  sortOrder   Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  facilities  UnitFacility[]
+  photos      UnitPhoto[]
+}
+
+model UnitFacility {
+  id        String   @id @default(cuid())
+  unitId    String
+  icon      String
+  label     String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  unit      Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
+}
+
+model UnitPhoto {
+  id        String   @id @default(cuid())
+  unitId    String
+  imageUrl  String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  unit      Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
+}
+
+model Crew {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  photoUrl  String
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum GalleryType {
+  MOMENT
+  TESTIMONIAL
+}
+
+model GalleryItem {
+  id        String      @id @default(cuid())
+  imageUrl  String
+  type      GalleryType
+  sortOrder Int         @default(0)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
