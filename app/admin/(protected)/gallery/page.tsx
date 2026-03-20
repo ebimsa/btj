@@ -16,6 +16,7 @@ export default async function GalleryAdminPage() {
       <SaveSuccessAlert />
       <h1 className="text-2xl font-black text-slate-900">Kelola Galeri & Testimoni</h1>
       <p className="mt-2 text-sm text-slate-600">Kelola foto momen dan testimoni pelanggan Bengal Trans Jaya.</p>
+      <p className="mt-1 text-xs font-semibold text-slate-500">Kolom bertanda * wajib diisi. Kolom tanpa tanda bisa dikosongkan.</p>
 
       <details className="hide-summary-when-open mt-6 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
         <summary className="hide-when-open cursor-pointer list-none rounded-xl bg-orange-500 px-4 py-3 text-center text-sm font-bold text-white hover:bg-orange-600">
@@ -26,7 +27,7 @@ export default async function GalleryAdminPage() {
             <ImageUploadPreview name="imageFile" label="📸 Upload Foto" required hint="Upload 1 foto untuk galeri" />
           </div>
           <div>
-            <label className="mb-2 block text-sm font-bold text-slate-900">Jenis</label>
+            <label className="mb-2 block text-sm font-bold text-slate-900">Jenis *</label>
             <select name="type" className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none">
               <option value="MOMENT">📷 Galeri Momen</option>
               <option value="TESTIMONIAL">⭐ Testimoni</option>

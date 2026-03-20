@@ -18,18 +18,19 @@ export default async function SettingsAdminPage() {
       <SaveSuccessAlert />
       <h1 className="text-2xl font-black text-slate-900">Pengaturan Website</h1>
       <p className="mt-2 text-sm text-slate-600">Kelola konten utama dan konfigurasi website.</p>
+      <p className="mt-1 text-xs font-semibold text-slate-500">Kolom bertanda * wajib diisi. Kolom tanpa tanda bisa dikosongkan.</p>
 
       <details className="hide-summary-when-open mt-6 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
         <summary className="hide-when-open cursor-pointer list-none rounded-xl bg-slate-900 px-4 py-3 text-center text-sm font-bold text-white hover:bg-slate-800">
           ⚙️ Edit Konten Hero & Kontak
         </summary>
         <form action={updateSiteConfig} className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <input name="heroTitle" defaultValue={config?.heroTitle || ""} required placeholder="Judul utama hero" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
-          <input name="heroSubtitle" defaultValue={config?.heroSubtitle || ""} required placeholder="Subtitle (label kecil)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
-          <textarea name="heroDescription" defaultValue={config?.heroDescription || ""} required placeholder="Deskripsi lengkap hero" className="rounded-xl border border-slate-300 px-4 py-3 text-sm lg:col-span-2 focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" rows={3} />
-          <input name="whatsappNumber" defaultValue={config?.whatsappNumber || ""} required placeholder="Nomor WA (628xxxxx atau 08xxxxx atau +628xxxxx)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
-          <input name="whatsappLabel" defaultValue={config?.whatsappLabel || ""} required placeholder="Teks tombol WA (contoh: Chat WhatsApp)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
-          <input name="locationLabel" defaultValue={config?.locationLabel || ""} required placeholder="nama lokasi (contoh: Lampung)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <input name="heroTitle" defaultValue={config?.heroTitle || ""} required placeholder="Judul utama hero*" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <input name="heroSubtitle" defaultValue={config?.heroSubtitle || ""} required placeholder="Subtitle* (label kecil)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <textarea name="heroDescription" defaultValue={config?.heroDescription || ""} required placeholder="Deskripsi lengkap hero*" className="rounded-xl border border-slate-300 px-4 py-3 text-sm lg:col-span-2 focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" rows={3} />
+          <input name="whatsappNumber" defaultValue={config?.whatsappNumber || ""} required placeholder="Nomor WA* (628xxxxx atau 08xxxxx atau +628xxxxx)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <input name="whatsappLabel" defaultValue={config?.whatsappLabel || ""} required placeholder="Teks tombol WA* (contoh: Chat WhatsApp)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <input name="locationLabel" defaultValue={config?.locationLabel || ""} required placeholder="Nama lokasi* (contoh: Lampung)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
           <div className="lg:col-span-2 flex flex-wrap justify-end gap-3">
             <SubmitButton className="h-11 min-w-32 rounded-xl bg-slate-900 hover:bg-slate-800 px-4 py-3 text-sm font-bold text-white shadow-md hover:shadow-lg transition-all">
               💾 Simpan Pengaturan

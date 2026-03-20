@@ -14,14 +14,15 @@ export default async function CrewsAdminPage() {
       <SaveSuccessAlert />
       <h1 className="text-2xl font-black text-slate-900">Kelola Kru</h1>
       <p className="mt-2 text-sm text-slate-600">Kelola tim kru pengemudi dan staf bengkel.</p>
+      <p className="mt-1 text-xs font-semibold text-slate-500">Kolom bertanda * wajib diisi. Kolom tanpa tanda bisa dikosongkan.</p>
 
       <details className="hide-summary-when-open mt-6 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
         <summary className="hide-when-open cursor-pointer list-none rounded-xl bg-orange-500 px-4 py-3 text-center text-sm font-bold text-white hover:bg-orange-600">
           + Tambah Kru Baru
         </summary>
         <form action={createCrew} className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <input name="name" required placeholder="Nama lengkap" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
-          <input name="role" required placeholder="Peran (Sopir, Kondektur, dll)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <input name="name" required placeholder="Nama lengkap*" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <input name="role" required placeholder="Peran* (Sopir, Kondektur, dll)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
           <div className="lg:col-span-2 rounded-2xl border-2 border-dashed border-orange-200 bg-orange-50 px-5 py-6">
             <ImageUploadPreview name="photoFile" label="📸 Upload Foto Kru" required hint="Upload 1 foto kru" />
           </div>

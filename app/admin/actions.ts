@@ -9,6 +9,8 @@ import { normalizePhoneNumber } from "@/lib/phone-utils";
 import { prisma } from "@/lib/prisma";
 import { getSupabaseAdmin } from "@/lib/supabase-admin";
 
+const MAX_UPLOAD_SIZE_BYTES = 5 * 1024 * 1024;
+
 function requiredString(formData: FormData, key: string) {
   const value = formData.get(key);
   if (typeof value !== "string" || !value.trim()) {
@@ -20,6 +22,10 @@ function requiredString(formData: FormData, key: string) {
 async function saveUploadedImage(file: File, folder: "crews" | "units" | "gallery" | "hero") {
   if (!file || file.size === 0) {
     return null;
+  }
+
+  if (file.size > MAX_UPLOAD_SIZE_BYTES) {
+    throw new Error("Ukuran gambar maksimal 5MB per file");
   }
 
   const mimeType = file.type || "";

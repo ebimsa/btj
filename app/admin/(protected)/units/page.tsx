@@ -21,15 +21,16 @@ export default async function UnitsAdminPage() {
       <SaveSuccessAlert />
       <h1 className="text-2xl font-black text-slate-900">Kelola Unit</h1>
       <p className="mt-2 text-sm text-slate-600">Kelola semua unit transportasi. Fasilitas dipilih via checklist icon + nama.</p>
+      <p className="mt-1 text-xs font-semibold text-slate-500">Kolom bertanda * wajib diisi. Kolom tanpa tanda bisa dikosongkan.</p>
 
       <details className="hide-summary-when-open mt-6 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
         <summary className="hide-when-open cursor-pointer list-none rounded-xl bg-orange-500 px-4 py-3 text-center text-sm font-bold text-white hover:bg-orange-600">
           + Tambah Unit Baru
         </summary>
         <form action={createUnit} className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <input name="name" required placeholder="Nama unit (contoh: Bus Medium 50 Seat)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
-          <input name="capacity" required placeholder="Kapasitas kursi (contoh: 38, 50, 60)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
-          <textarea name="description" required placeholder="Deskripsi unit" className="rounded-xl border border-slate-300 px-4 py-3 text-sm lg:col-span-2 focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" rows={3} />
+          <input name="name" required placeholder="Nama unit* (contoh: Bus Medium 50 Seat)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <input name="capacity" required placeholder="Kapasitas kursi* (contoh: 38, 50, 60)" className="rounded-xl border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" />
+          <textarea name="description" required placeholder="Deskripsi unit*" className="rounded-xl border border-slate-300 px-4 py-3 text-sm lg:col-span-2 focus:ring-2 focus:ring-orange-300 focus:border-transparent outline-none" rows={3} />
           <div className="lg:col-span-2 rounded-2xl border border-slate-300 bg-white p-4">
             <p className="mb-3 text-sm font-bold text-slate-900">Pilih Fasilitas / Spesifikasi</p>
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
