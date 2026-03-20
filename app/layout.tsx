@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Bengal Trans Jaya | Perjalanan Nyaman",
+  title: "BTJ - Sewa Bus Pariwisata",
   description:
     "Layanan transportasi bus pariwisata premium untuk perjalanan nyaman dan aman.",
 };

@@ -27,10 +27,10 @@ export default function AdminNavLinks() {
             key={item.href}
             href={item.href}
             className={[
-              'shrink-0 whitespace-nowrap rounded-xl px-3 py-2 transition-all',
+              'shrink-0 whitespace-nowrap rounded-xl px-3 py-2 transition-all duration-200',
               isActive
-                ? 'bg-orange-100 text-orange-700 ring-1 ring-orange-300'
-                : 'text-slate-700 hover:bg-slate-100 hover:text-orange-600',
+                ? 'bg-linear-to-r from-orange-500 to-orange-600 text-white shadow-md ring-1 ring-orange-300/70'
+                : 'text-slate-700 hover:bg-orange-50 hover:text-orange-700',
             ].join(' ')}
             aria-current={isActive ? 'page' : undefined}
           >

@@ -33,7 +33,7 @@ async function saveUploadedImage(file: File, folder: "crews" | "units" | "galler
   const fileName = `${Date.now()}-${randomUUID()}.${extension}`;
   const objectPath = `uploads/${folder}/${fileName}`;
   const arrayBuffer = await file.arrayBuffer();
-  const bucket = process.env.SUPABASE_STORAGE_BUCKET || "btj-media";
+  const bucket = process.env.SUPABASE_STORAGE_BUCKET || "btj-assets";
   const supabaseAdmin = getSupabaseAdmin();
 
   const { error: uploadError } = await supabaseAdmin.storage

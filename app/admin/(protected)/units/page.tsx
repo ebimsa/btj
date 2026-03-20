@@ -4,6 +4,7 @@ import SubmitButton from "@/components/SubmitButton";
 import ImageUploadPreview from "@/components/ImageUploadPreview";
 import SaveSuccessAlert from "@/components/SaveSuccessAlert";
 import CancelFormButton from "@/components/CancelFormButton";
+import DeleteSubmitButton from "@/components/DeleteSubmitButton";
 import { FACILITY_OPTIONS, toFacilityValue } from "@/lib/facility-options";
 
 export default async function UnitsAdminPage() {
@@ -72,9 +73,9 @@ export default async function UnitsAdminPage() {
                 </div>
                 <form action={deleteUnit}>
                   <input type="hidden" name="id" value={unit.id} />
-                  <button type="submit" className="rounded-lg bg-red-100 hover:bg-red-200 px-3 py-2 text-xs font-bold text-red-700 transition-all">
+                  <DeleteSubmitButton className="rounded-lg bg-red-100 hover:bg-red-200 px-3 py-2 text-xs font-bold text-red-700">
                     Hapus
-                  </button>
+                  </DeleteSubmitButton>
                 </form>
               </div>
 

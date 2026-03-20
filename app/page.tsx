@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { getPublicData } from "@/lib/public-data";
 import HeroCarousel from "@/components/HeroCarousel";
+import LandingNavbar from "@/components/LandingNavbar";
+import GalleryShowcase from "@/components/GalleryShowcase";
 
 export default async function Home() {
   const data = await getPublicData();
@@ -8,34 +10,7 @@ export default async function Home() {
 
   return (
     <>
-      <nav className="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/85 backdrop-blur-md">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
-          <div className="text-xl font-extrabold italic tracking-tight text-slate-900 sm:text-2xl">
-            Bengal Trans Jaya
-          </div>
-          <div className="hidden items-center gap-8 md:flex">
-            <a className="text-sm font-bold text-orange-600" href="#beranda">Beranda</a>
-            <a className="text-sm font-semibold text-slate-600 transition-colors hover:text-orange-500" href="#unit">Unit</a>
-            <a className="text-sm font-semibold text-slate-600 transition-colors hover:text-orange-500" href="#kru">Kru</a>
-            <a className="text-sm font-semibold text-slate-600 transition-colors hover:text-orange-500" href="#galeri">Galeri</a>
-            <a className="text-sm font-semibold text-slate-600 transition-colors hover:text-orange-500" href="#kontak">Kontak</a>
-            <a
-              href="/admin/login"
-              className="rounded-xl border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
-            >
-              Admin
-            </a>
-          </div>
-          <a
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden rounded-xl bg-orange-500 px-5 py-2 text-sm font-bold text-white sm:block"
-          >
-            Konsultasi
-          </a>
-        </div>
-      </nav>
+      <LandingNavbar whatsappHref={whatsappHref} />
 
       <HeroCarousel
         slides={data.heroSlides}
@@ -47,12 +22,12 @@ export default async function Home() {
         whatsappNumber={data.config.whatsappNumber}
       />
 
-      <main className="relative z-20 mx-auto w-full max-w-7xl px-6 py-12 md:py-20 lg:py-28">
+      <main className="relative z-20 mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 md:py-20 lg:py-28">
         <section id="unit" className="mb-20 md:mb-32">
           <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="mb-2 text-3xl font-black text-slate-900 sm:text-4xl">Unit Kami</h2>
-              <p className="font-medium text-slate-600">Data unit dikelola dari portal admin.</p>
+              <p className="font-medium text-slate-600">Pilih armada yang paling cocok untuk kebutuhan perjalanan Anda.</p>
             </div>
             <div className="hidden h-1 w-32 bg-orange-500 md:block" />
           </div>
@@ -107,16 +82,16 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="kru" className="mb-24">
+        <section id="kru" className="mb-14 md:mb-16">
           <div className="mb-10 flex items-end justify-between">
             <div>
               <h2 className="mb-2 text-3xl font-black text-slate-900 sm:text-4xl">Kru Profesional Kami</h2>
-              <p className="font-medium text-slate-600">Data kru dikelola dari portal admin.</p>
+              <p className="font-medium text-slate-600">Didukung kru berpengalaman untuk perjalanan yang aman dan nyaman.</p>
             </div>
             <div className="hidden h-1 w-32 bg-orange-500 md:block" />
           </div>
 
-          <div className="grid grid-cols-3 gap-3 sm:gap-6 md:grid-cols-3 md:gap-10">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-6 md:gap-10">
             {data.crews.map((crew) => (
               <div key={crew.id} className="group relative">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-xl shadow-lg sm:rounded-3xl sm:shadow-2xl">
@@ -124,8 +99,8 @@ export default async function Home() {
                 </div>
                 <div className="relative -mt-6 mx-2 rounded-xl bg-white p-2 shadow-lg ring-1 ring-black/5 sm:-mt-12 sm:mx-6 sm:rounded-3xl sm:p-5">
                   <div className="text-center">
-                    <h3 className="text-[10px] font-black tracking-tight text-slate-900 sm:text-xl">{crew.name}</h3>
-                    <p className="text-[8px] font-bold tracking-widest text-orange-600 uppercase sm:text-xs sm:tracking-[0.2em]">{crew.role}</p>
+                    <h3 className="text-xs font-black tracking-tight text-slate-900 sm:text-xl">{crew.name}</h3>
+                    <p className="text-[10px] font-bold tracking-wide text-orange-600 uppercase sm:text-xs sm:tracking-[0.2em]">{crew.role}</p>
                   </div>
                 </div>
               </div>
@@ -133,40 +108,8 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="galeri" className="py-20">
-          <div className="mb-12 flex items-center justify-between">
-            <div className="max-w-xl">
-              <h2 className="mb-2 text-3xl font-black text-slate-900 sm:text-4xl">Momen & Testimoni</h2>
-              <p className="font-medium text-slate-600">Foto momen dan testimoni dikelola dari portal admin.</p>
-            </div>
-            <div className="hidden h-1 w-32 bg-orange-500 md:block" />
-          </div>
-
-          <div className="mb-12 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 lg:mb-16">
-            {data.moments.map((item, idx) => (
-              <div key={item.id} className="group relative aspect-square overflow-hidden rounded-3xl bg-slate-100 shadow-sm transition-all hover:shadow-lg">
-                <Image
-                  src={item.imageUrl}
-                  alt={`Galeri Bengal Trans Jaya ${idx + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {data.testimonials.map((item, idx) => (
-              <div key={item.id} className="group relative aspect-video overflow-hidden rounded-3xl bg-slate-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
-                <Image
-                  src={item.imageUrl}
-                  alt={`Testimoni Bengal Trans Jaya ${idx + 1}`}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-            ))}
-          </div>
+        <section id="galeri" className="pt-8 pb-20 md:pt-10">
+          <GalleryShowcase moments={data.moments} testimonials={data.testimonials} />
         </section>
       </main>
 
@@ -190,7 +133,7 @@ export default async function Home() {
 
           <div>
             <h4 className="mb-4 text-sm font-bold uppercase tracking-widest text-orange-500">Kontak Cepat</h4>
-            <p className="mb-4 text-xs text-slate-400">Hubungi admin untuk ketersediaan unit dan penawaran harga terbaik.</p>
+            <p className="mb-4 text-xs text-slate-400">Hubungi tim kami untuk cek ketersediaan unit dan dapatkan penawaran terbaik.</p>
             <a
               href={whatsappHref}
               target="_blank"

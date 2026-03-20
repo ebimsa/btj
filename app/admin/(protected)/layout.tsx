@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { logoutAdmin } from "@/app/admin/actions";
 import AdminNavLinks from "@/components/AdminNavLinks";
+import AdminScrollableNav from "@/components/AdminScrollableNav";
+import LogoutSubmitButton from "@/components/LogoutSubmitButton";
 import { requireAdmin } from "@/lib/auth";
 
 export default async function AdminProtectedLayout({
@@ -19,17 +20,12 @@ export default async function AdminProtectedLayout({
             <p className="text-sm font-medium text-slate-600">Login sebagai <span className="font-bold text-slate-900">{admin.username}</span></p>
           </div>
 
-          <nav className="no-scrollbar flex w-full items-center gap-2 overflow-x-auto text-sm font-semibold sm:w-auto sm:flex-wrap">
-            <AdminNavLinks />
-            <form action={logoutAdmin}>
-              <button
-                type="submit"
-                className="shrink-0 whitespace-nowrap rounded-xl bg-slate-900 hover:bg-slate-700 px-3 py-2 text-white shadow-md hover:shadow-lg transition-all"
-              >
-                🚪 Keluar
-              </button>
-            </form>
-          </nav>
+          <AdminScrollableNav>
+              <AdminNavLinks />
+              <form action={logoutAdmin}>
+                <LogoutSubmitButton />
+              </form>
+          </AdminScrollableNav>
         </div>
       </header>
 

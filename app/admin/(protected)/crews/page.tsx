@@ -4,6 +4,7 @@ import SubmitButton from "@/components/SubmitButton";
 import ImageUploadPreview from "@/components/ImageUploadPreview";
 import SaveSuccessAlert from "@/components/SaveSuccessAlert";
 import CancelFormButton from "@/components/CancelFormButton";
+import DeleteSubmitButton from "@/components/DeleteSubmitButton";
 
 export default async function CrewsAdminPage() {
   const crews = await prisma.crew.findMany({ orderBy: { sortOrder: "asc" } });
@@ -48,9 +49,9 @@ export default async function CrewsAdminPage() {
                 </div>
                 <form action={deleteCrew}>
                   <input type="hidden" name="id" value={crew.id} />
-                  <button type="submit" className="rounded-lg bg-red-100 hover:bg-red-200 px-3 py-2 text-xs font-bold text-red-700 transition-all">
+                  <DeleteSubmitButton className="rounded-lg bg-red-100 hover:bg-red-200 px-3 py-2 text-xs font-bold text-red-700">
                     Hapus
-                  </button>
+                  </DeleteSubmitButton>
                 </form>
               </div>
 

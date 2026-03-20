@@ -5,6 +5,7 @@ import HeroThumbnail from "@/components/HeroThumbnail";
 import ImageUploadPreview from "@/components/ImageUploadPreview";
 import SaveSuccessAlert from "@/components/SaveSuccessAlert";
 import CancelFormButton from "@/components/CancelFormButton";
+import DeleteSubmitButton from "@/components/DeleteSubmitButton";
 
 export default async function SettingsAdminPage() {
   const [config, slides] = await Promise.all([
@@ -77,9 +78,9 @@ export default async function SettingsAdminPage() {
                 {/* Delete Button */}
                 <form action={deleteHeroSlide} className="flex-shrink-0">
                   <input type="hidden" name="id" value={slide.id} />
-                  <button type="submit" className="rounded-xl bg-red-600 hover:bg-red-700 px-4 py-2 text-xs font-bold text-white shadow-md hover:shadow-lg transition-all">
+                  <DeleteSubmitButton className="rounded-xl bg-red-600 hover:bg-red-700 px-4 py-2 text-xs font-bold text-white shadow-md hover:shadow-lg">
                     🗑️ Hapus
-                  </button>
+                  </DeleteSubmitButton>
                 </form>
               </div>
             ))

@@ -46,16 +46,6 @@ export default function HeroCarousel({
     return () => clearInterval(interval);
   }, [mounted, slides.length]);
 
-  const slide = slides[currentSlide];
-
-  const handlePrevious = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const handleNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
   };
@@ -64,46 +54,27 @@ export default function HeroCarousel({
     <header id="beranda" className="relative flex min-h-[620px] items-end overflow-hidden pt-28 sm:min-h-[720px]">
       {/* Carousel Images */}
       <div className="absolute inset-0 w-full h-full">
-        {slide && (
+        {slides.map((item, index) => (
           <Image
-            key={slide.id}
-            src={slide.imageUrl}
+            key={item.id}
+            src={item.imageUrl}
             alt="Hero Bengal Trans Jaya"
             fill
-            priority
+            priority={index === 0}
             sizes="100vw"
-            className="object-cover transition-opacity duration-1000"
+            className={`object-cover transition-all duration-[1600ms] ease-in-out ${
+              index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02]'
+            }`}
           />
-        )}
+        ))}
       </div>
 
       {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-linear-to-r from-slate-950/90 via-slate-900/60 to-transparent" />
 
-      {/* Navigation Buttons - hanya tampil jika lebih dari 1 slide */}
+      {/* Slide Indicators Dots */}
       {slides.length > 1 && (
         <>
-          <button
-            onClick={handlePrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 transition-all duration-200 md:left-6"
-            aria-label="Foto sebelumnya"
-          >
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            onClick={handleNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 transition-all duration-200 md:right-6"
-            aria-label="Foto berikutnya"
-          >
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          {/* Slide Indicators Dots */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2 md:bottom-8">
             {slides.map((_, index) => (
               <button
