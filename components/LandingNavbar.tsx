@@ -25,7 +25,7 @@ export default function LandingNavbar({ whatsappHref }: LandingNavbarProps) {
             width={170}
             height={38}
             priority
-            className="h-7 w-auto sm:h-11"
+            className="h-6 w-auto sm:h-9"
           />
         </a>
 
@@ -44,9 +44,10 @@ export default function LandingNavbar({ whatsappHref }: LandingNavbarProps) {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl bg-orange-500 px-5 py-2 text-sm font-bold text-white"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500 text-white"
+            aria-label="Chat WhatsApp"
           >
-            Konsultasi
+            <span className="material-symbols-outlined text-[20px]">chat</span>
           </a>
         </div>
 
@@ -54,9 +55,10 @@ export default function LandingNavbar({ whatsappHref }: LandingNavbarProps) {
           href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-xl bg-orange-500 px-3 py-2 text-xs font-bold text-white md:hidden"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500 text-white md:hidden"
+          aria-label="Chat WhatsApp"
         >
-          Konsultasi
+          <span className="material-symbols-outlined text-[18px]">chat</span>
         </a>
       </div>
     </nav>

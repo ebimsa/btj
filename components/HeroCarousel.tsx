@@ -46,10 +46,6 @@ export default function HeroCarousel({
     return () => clearInterval(interval);
   }, [mounted, slides.length]);
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-
   return (
     <header id="beranda" className="relative flex min-h-[620px] items-end overflow-hidden pt-28 sm:min-h-[720px]">
       {/* Carousel Images */}
@@ -71,26 +67,6 @@ export default function HeroCarousel({
 
       {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-linear-to-r from-slate-950/90 via-slate-900/60 to-transparent" />
-
-      {/* Slide Indicators Dots */}
-      {slides.length > 1 && (
-        <>
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2 md:bottom-8">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`h-3 w-3 rounded-full backdrop-blur-sm transition-all duration-300 ${
-                  index === currentSlide
-                    ? 'bg-orange-500 w-8'
-                    : 'bg-white/50 hover:bg-white/70'
-                }`}
-                aria-label={`Ke slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </>
-      )}
 
       {/* Content */}
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 pb-16 md:flex-row md:items-end md:justify-between md:pb-24">
